@@ -1,3 +1,0 @@
----
-zookeeper_java_package: "openjdk-{{ zookeeper_java_version }}-jdk-headless"
-zookeeper_env_file: "/etc/default/zookeeper"
