@@ -1,0 +1,49 @@
+---
+#------------------------------------------------------------------------------
+# GENERAL
+#------------------------------------------------------------------------------
+zookeeper_version: "3.8.0"
+
+zookeeper_user: zookeeper
+zookeeper_group: zookeeper
+
+zookeeper_install_dir: "/usr/local/zookeeper-{{ zookeeper_version }}"
+zookeeper_current_dir: "/usr/local/zookeeper"
+zookeeper_config_dir: "/etc/zookeeper"
+
+zookeeper_java_install: true
+zookeeper_java_version: "17"
+
+zookeeper_restart_onchanges: true
+
+#------------------------------------------------------------------------------
+# CONFIGURATIONS
+#------------------------------------------------------------------------------
+
+# - Global options -
+zookeeper_ticktime: 2000
+zookeeper_maxclientcnxns: 10
+zookeeper_data_dir: "/var/lib/zookeeper"
+zookeeper_datalog_dir: "{{ zookeeper_data_dir }}"
+zookeeper_log_dir: "/var/log/zookeeper"
+zookeeper_clientport: "2181"
+zookeeper_clientportaddress: "0.0.0.0"
+zookeeper_autopurge_snapretaincount: 3
+zookeeper_autopurge_purgeinterval: 0
+
+zookeeper_extra_env_vars: []
+
+# - Cluster options -
+zookeeper_cluster_mode_enabled: false
+zookeeper_id: 1
+zookeeper_servers: {}
+zookeeper_initlimit: 5 
+zookeeper_synclimit: 2
+
+# - Admin Server -
+zookeeper_adminserver_enabled: true
+zookeeper_adminserver_address: "0.0.0.0"
+zookeeper_adminserver_port: 8080
+zookeeper_adminserver_idletimeout: 30000
+zookeeper_adminserver_commandurl: "/commands"
+

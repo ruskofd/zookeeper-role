@@ -1,0 +1,52 @@
+# Managed by Ansible
+
+# - Global options -
+
+# The basic time unit in milliseconds used by ZooKeeper. It is used to do heartbeats and the minimum session timeout will be twice the tickTime. 
+tickTime={{ zookeeper_ticktime }}
+
+# The location where ZooKeeper will store the in-memory database snapshots and, unless specified otherwise, the transaction log of updates to the database
+dataDir={{ zookeeper_data_dir }}
+
+# This allows a dedicated log device to be used, and helps avoid competition between logging and snaphots
+dataLogDir={{ zookeeper_datalog_dir }}
+
+# Limits the number of concurrent connections (at the socket level) that a single client, identified by IP address, may make to a single member of the ZooKeeper ensemble
+maxClientCnxns={{ zookeeper_maxclientcnxns }}
+
+# The address (ipv4, ipv6 or hostname) to listen for client connections
+clientPortAddress={{ zookeeper_clientportaddress }}
+
+# The port to listen for client connections
+clientPort={{ zookeeper_clientport }}
+
+# When enabled, ZooKeeper auto purge feature retains the autopurge.snapRetainCount most recent snapshots and the corresponding transaction logs in the dataDir and dataLogDir respectively and deletes the rest
+autopurge.snapRetainCount={{ zookeeper_autopurge_snapretaincount }}
+
+# The time interval in hours for which the purge task has to be triggered
+autopurge.purgeInterval={{ zookeeper_autopurge_purgeinterval }}
+
+{% if zookeeper_cluster_mode_enabled -%}
+# - Cluster options -
+
+# Amount of time, in ticks (see tickTime), to allow followers to connect and sync to a leader.
+initLimit={{ zookeeper_initlimit }}
+
+# Amount of time, in ticks (see tickTime), to allow followers to sync with ZooKeeper. If followers fall too far behind a leader, they will be dropped
+syncLimit={{ zookeeper_synclimit }}
+
+# Servers making up the ZooKeeper ensemble
+{% for server in zookeeper_servers %}
+server.{{ server.id }}={{ server.host }}:{{ server.peer_port }}:{{ server.election_port }}
+{% endfor %}
+{%- endif %}
+
+{% if zookeeper_adminserver_enabled %}
+# - Admin server
+admin.enableServer=true
+admin.serverAddress={{ zookeeper_adminserver_address }}
+admin.serverPort={{ zookeeper_adminserver_port }}
+admin.idleTimeout={{ zookeeper_adminserver_idletimeout }}
+admin.commandURL={{ zookeeper_adminserver_commandurl }}
+{% endif %}
+

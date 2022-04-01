@@ -1,0 +1,51 @@
+---
+- name: Check if Zookeeper is already installed
+  ansible.builtin.stat:
+    path: "{{ zookeeper_install_dir }}"
+  register: _zookeeper_install_dir
+  tags: zk_install
+
+- name: Install Zookeeper
+  block:
+    - name: Download Zookeeper distribution
+      ansible.builtin.get_url:
+        url: "https://dlcdn.apache.org/zookeeper/zookeeper-{{ zookeeper_version }}/apache-zookeeper-{{ zookeeper_version }}-bin.tar.gz"
+        dest: "/tmp/zookeeper-{{ zookeeper_version }}.tar.gz"
+        owner: root
+        group: root
+        mode: '0644'
+      tags: zk_install
+
+    - name: Ensure Zookeeper installation directory exists
+      ansible.builtin.file:
+        path: "{{ zookeeper_install_dir }}"
+        state: directory
+        owner: "{{ zookeeper_user }}"
+        group: "{{ zookeeper_group }}"
+        mode: '0755'
+      tags: zk_install
+
+    - name: Install Zookeeper archive
+      ansible.builtin.unarchive:
+        src: "/tmp/zookeeper-{{ zookeeper_version }}.tar.gz"
+        dest: "{{ zookeeper_install_dir }}"
+        remote_src: yes
+        extra_opts: [ '--strip-components=1' ]
+        owner: "{{ zookeeper_user }}"
+        group: "{{ zookeeper_group }}"
+      tags: zk_install
+
+    - name: Create symlink to current Zookeeper installation
+      ansible.builtin.file:
+        src: "{{ zookeeper_install_dir }}"
+        dest: "{{ zookeeper_current_dir }}"
+        state: link
+        force: yes
+      tags: zk_install
+
+    - name: Purge Zookeeper tarball
+      ansible.builtin.file:
+        path: "/tmp/zookeeper-{{ zookeeper_version }}.tar.gz"
+        state: absent
+      tags: zk_install
+  when: not _zookeeper_install_dir.stat.exists

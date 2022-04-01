@@ -1,0 +1,3 @@
+---
+zookeeper_java_package: "java-{{ zookeeper_java_version }}-openjdk"
+zookeeper_env_file: "/etc/sysconfig/zookeeper"

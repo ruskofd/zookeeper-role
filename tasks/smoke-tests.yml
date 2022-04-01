@@ -1,0 +1,7 @@
+---
+- name: "[SMOKE TEST] Check if Zookeeper is responding ('ruok' sent to admin server)"
+  ansible.builtin.uri:
+    url: "http://{{ zookeeper_adminserver_address }}:{{ zookeeper_adminserver_port}}/commands/ruok"
+    method: GET
+  when: zookeeper_adminserver_enabled
+

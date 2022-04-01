@@ -1,0 +1,31 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags:
+    - zk_install
+    - zk_config
+    - zk_service
+
+- name: System tasks
+  import_tasks: system.yml
+  tags: zk_install
+
+- name: Install Zookeeper
+  import_tasks: install.yml
+  tags: zk_install
+
+- name: Manage Zookeeper configuration
+  import_tasks: configure.yml
+  tags: zk_config
+
+- name: Manage Zookeeper service
+  import_tasks: service.yml
+  tags: zk_service
+
+- name: Smoke tests
+  import_tasks: smoke-tests.yml

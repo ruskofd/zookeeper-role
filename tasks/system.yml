@@ -1,0 +1,19 @@
+---
+- name: Create Zookeeper group
+  ansible.builtin.group:
+    name: "{{ zookeeper_group }}"
+    system: yes
+    state: present
+
+- name: Create Zookeeper user
+  ansible.builtin.user:
+    name: "{{ zookeeper_user }}"
+    group: "{{ zookeeper_group }}"
+    system: yes
+    state: present
+
+- name: Install OpenJDK {{ zookeeper_java_version }}
+  ansible.builtin.package:
+    name: "{{ zookeeper_java_package }}"
+    state: present
+  when: zookeeper_java_install

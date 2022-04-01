@@ -1,0 +1,19 @@
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target
+After=network.target
+
+[Service]
+Type=forking
+User={{ zookeeper_user }}
+Group={{ zookeeper_group }}
+EnvironmentFile={{ zookeeper_env_file }}
+ExecStart={{ zookeeper_current_dir }}/bin/zkServer.sh start {{ zookeeper_config_dir }}/zoo.cfg
+ExecStop={{ zookeeper_current_dir }}/bin/zkServer.sh stop {{ zookeeper_config_dir }}/zoo.cfg
+WorkingDirectory={{ zookeeper_current_dir }}
+TimeoutSec=30
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
