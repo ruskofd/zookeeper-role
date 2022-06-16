@@ -4,7 +4,7 @@
 
 ### General informations
 
-This Ansible role is designed to deploy and manage Apache Zookeeper instances but also for bootstraping multi-nodes clusters.
+This Ansible role is designed to deploy and manage Apache Zookeeper instances, but also for bootstraping multi-nodes ensembles (cluster).
 
 **Table of Contents**
 
@@ -14,8 +14,7 @@ This Ansible role is designed to deploy and manage Apache Zookeeper instances bu
 
 **Supported Platforms**
 
-  - Red Hat Enterprise Linux 8.x
-  - Fedora 36
+  - Red Hat Enterprise Linux 8.x / Fedora 36
   - Ubuntu 22.04
 
 **References**
@@ -94,7 +93,7 @@ This role has some tags that you can use for some operations without replaying t
     - name: zookeeper
       src: https://github.com/ruskofd/zookeeper-role.git
       scm: git
-      version: 1.1.0
+      version: 1.0.0
 
   $ ansible-galaxy install -f -r requirements.yml
   ```
