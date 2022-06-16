@@ -44,4 +44,3 @@ zookeeper_adminserver_address: "0.0.0.0"
 zookeeper_adminserver_port: 8080
 zookeeper_adminserver_idletimeout: 30000
 zookeeper_adminserver_commandurl: "/commands"
-
