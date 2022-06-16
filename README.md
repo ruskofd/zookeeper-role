@@ -72,9 +72,8 @@ This role has some tags that you can use for some operations without replaying t
   You can define extra environment variables to pass to Zookeeper using the `zookeeper_extra_env_vars` variable :
 
   ```YAML
-  ---
   zookeeper_extra_env_vars:
-    - "VAR=VALUE" 
+    - "VAR=VALUE"
   ```
 
 ### Install and use this role
