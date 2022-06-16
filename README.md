@@ -1,6 +1,6 @@
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Apache_ZooKeeper_logo.svg" alt="etcd-logo" title="etcd" align="top" height=190 /></p>
 
-*Apache ZooKeeper is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination. ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.*
+***Apache ZooKeeper** is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination. ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.*
 
 ### General informations
 
@@ -14,8 +14,9 @@ This Ansible role is designed to deploy and manage Apache Zookeeper instances bu
 
 **Supported Platforms**
 
-  - CentOS/RHEL 8
-  - Fedora 35
+  - Red Hat Enterprise Linux 8.x
+  - Fedora 36
+  - Ubuntu 22.04
 
 **References**
 
@@ -93,7 +94,7 @@ This role has some tags that you can use for some operations without replaying t
     - name: zookeeper
       src: https://github.com/ruskofd/zookeeper-role.git
       scm: git
-      version: 1.0.0
+      version: 1.1.0
 
   $ ansible-galaxy install -f -r requirements.yml
   ```

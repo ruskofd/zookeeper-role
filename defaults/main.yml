@@ -11,10 +11,8 @@ zookeeper_install_dir: "/usr/local/zookeeper-{{ zookeeper_version }}"
 zookeeper_current_dir: "/usr/local/zookeeper"
 zookeeper_config_dir: "/etc/zookeeper"
 
-zookeeper_java_install: true
-zookeeper_java_version: "17"
-
-zookeeper_restart_onchanges: true
+zookeeper_java_pkg_install: true
+zookeeper_java_pkg_version: "17"
 
 #------------------------------------------------------------------------------
 # CONFIGURATIONS

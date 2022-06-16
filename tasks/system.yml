@@ -12,8 +12,8 @@
     system: yes
     state: present
 
-- name: Install OpenJDK {{ zookeeper_java_version }}
+- name: Install OpenJDK {{ zookeeper_java_pkg_version }}
   ansible.builtin.package:
-    name: "{{ zookeeper_java_package }}"
+    name: "{{ zookeeper_java_pkg_name }}"
     state: present
-  when: zookeeper_java_install
+  when: zookeeper_java_pkg_install

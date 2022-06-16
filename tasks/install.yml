@@ -35,7 +35,7 @@
         group: "{{ zookeeper_group }}"
       tags: zk_install
 
-    - name: Create symlink to current Zookeeper installation
+    - name: Ensure symlink to current Zookeeper installation exists
       ansible.builtin.file:
         src: "{{ zookeeper_install_dir }}"
         dest: "{{ zookeeper_current_dir }}"
